@@ -1,270 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
     <title>Админка</title>
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/select2/css/select2.min.css')}}">
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
-    <!-- Ekko Lightbox -->
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/ekko-lightbox/ekko-lightbox.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <script src="{{asset('dastone/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('dastone/plugins/toastr/toastr.min.js')}}"></script>
+    <script src="{{asset('dastone/assets/js/metismenu.min.js')}}"></script>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('dastone/assets/images/favicon.ico')}}">
+
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    <link href="{{asset('dastone/plugins/datatables/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('dastone/plugins/datatables/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="{{asset('dastone/plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- jvectormap -->
+    <link href="{{asset('dastone/plugins/jvectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet">
+
+    <!-- App css -->
+    <link href="{{asset('dastone/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('dastone/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('dastone/assets/css/metisMenu.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('dastone/plugins/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('dastone/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"/>
+
+    <link href="{{asset('dastone/plugins/toastr/toastr.css')}}" rel="stylesheet"/>
+
+    <link href="{{asset('dastone/plugins/treeview/themes/default/style.css')}}" rel="stylesheet">
+
+    <link href="{{asset('dastone/assets/css/custom-styles.css')}}" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="{{asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo"
-             height="60" width="60">
-    </div>
-
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-        </ul>
-
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <li class="nav-item">
-
-            </li>
-
-            <!-- Messages Dropdown Menu -->
-            {{-- <li class="nav-item dropdown">
-                 <a class="nav-link" data-toggle="dropdown" href="#">
-                     <i class="far fa-comments"></i>
-                     <span class="badge badge-danger navbar-badge">3</span>
-                 </a>
-             </li>
-             <!-- Notifications Dropdown Menu -->
-             <li class="nav-item dropdown mr-2">
-                 <a class="nav-link" data-toggle="dropdown" href="#">
-                     <i class="far fa-bell"></i>
-                     <span class="badge badge-warning navbar-badge">15</span>
-                 </a>
-             </li>--}}
-            <!-- Logout -->
-            <li class="nav-item dropdown mr-3 mt-1">
-                <form action="#" method="post">
-                    @csrf
-                    <button class="text-secondary" style="background: transparent; border: 0" type="submit">Выход <i
-                            class="fas fa-sign-out-alt"></i></button>
-                </form>
-            </li>
-        </ul>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="/" class="brand-link">
-            <img src="{{asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
-                 class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Магазин</span>
+<body class="">
+<!-- Left Sidenav -->
+<div class="left-sidenav">
+    <!-- LOGO -->
+    <div class="brand">
+        <a href="/" class="logo">
+            <span>
+                <img src="{{asset('dastone/assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
+            </span>
+            <span>
+                <img src="{{asset('dastone/assets/images/logo.png')}}" alt="logo-large"
+                             class="logo-lg logo-light">
+                <img src="{{asset('dastone/assets/images/logo-dark.png')}}" alt="logo-large"
+                             class="logo-lg logo-dark">
+            </span>
         </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-signal"></i>
-                            <p>
-                                Продажи
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Заказы</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Возвраты</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Счета</p>
-                                </a>
-                            </li>
-                        </ul>
+    </div>
+    <!--end logo-->
+    <div class="menu-content h-100" data-simplebar>
+        <ul class="metismenu left-sidenav-menu">
+            <li>
+                <a href="#" onclick="document.location='/';"> <i data-feather="home" class="align-self-center menu-icon"></i>Главная</a>
+            </li>
+            <li>
+                <a href="#"> <i data-feather="bar-chart-2" class="align-self-center menu-icon"></i><span>Продажи</span><span
+                        class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Заказы</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-list-ul"></i>
-                            <p>
-                                Каталог
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Товары</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Категории</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-
-                                    <p>Атрибуты</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-
-                                    <p>Коллекции атрибутов</p>
-                                </a>
-                            </li>
-                        </ul>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Возвраты</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-users"></i>
-                            <p>
-                                Покупатели
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Покупатели</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Отзывы</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-cog"></i>
-                            <p>
-                                Конфигурация
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Email</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <p>Продажи</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-user-shield"></i>
-                            <p>Пользователи</p>
-                        </a>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Счета</a>
                     </li>
                 </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
+            </li>
+            <li>
+                <a href="#"> <i data-feather="list" class="align-self-center menu-icon"></i><span>Каталог</span><span
+                        class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="{{route('products.index')}}"><i class="ti-control-record"></i>Товары</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('admin.categories.index')}}"><i class="ti-control-record"></i>Категории</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Атрибуты</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Коллеции атрибутов</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"> <i data-feather="user" class="align-self-center menu-icon"></i><span>Клиенты</span><span
+                        class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Все покупатели</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Отзывы</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"> <i data-feather="tool" class="align-self-center menu-icon"></i><span>Конфигурация</span><span
+                        class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Электронная почта</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Продажи</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('admin.inventories.index')}}"><i class="ti-control-record"></i>Склады</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="document.location='/users';"> <i data-feather="users" class="align-self-center menu-icon"></i>Пользователи</a>
+            </li>
+        </ul>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        @yield('content')
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>Copyright &copy; 2019-{{now()->year}} <a href="/">Магазин</a>.</strong>
-        Все права защищены.
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
+<!-- end left-sidenav-->
 
-<!-- jQuery -->
-<script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{asset('adminlte/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- overlayScrollbars -->
-<script src="{{asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('adminlte/dist/js/adminlte.js')}}"></script>
-<!-- DataTables  & Plugins -->
-<script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<!-- Select2 -->
-<script src="{{asset('adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
-<script src="{{asset('adminlte/plugins/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
-<script>
-    $('.select2').select2();
-</script>
-<script>
-    function clearFilters() {
-        var url = window.location.href.split("?")[0];
-        history.pushState({path: url}, '', url);
-        window.location.href = window.location.href;
-    }
-</script>
-<script>
-    $(document).ready(function () {
-        $('.product-image-thumb').on('click', function () {
-            var $image_element = $(this).find('img')
-            $('.product-image').prop('src', $image_element.attr('src'))
-            $('.product-image-thumb.active').removeClass('active')
-            $(this).addClass('active')
-        })
-    })
-</script>
+
+<div class="page-wrapper">
+    <!-- Top Bar Start -->
+    <div class="topbar">
+        <!-- Navbar -->
+        <nav class="navbar-custom">
+            <ul class="list-unstyled topbar-nav float-end mb-0">
+
+
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown"
+                       href="#" role="button"
+                       aria-haspopup="false" aria-expanded="false">
+                        <span class="ms-1 nav-user-name">Имя пользователя</span>
+                        <img src="{{asset('dastone/assets/images/users/m1000x1000.jpg')}}" alt="profile-user"
+                             class="rounded-circle thumb-xs"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#"><i data-feather="user"
+                                                             class="align-self-center icon-xs icon-dual me-1"></i>
+                            Профиль</a>
+                        <a class="dropdown-item" href="#"><i data-feather="settings"
+                                                             class="align-self-center icon-xs icon-dual me-1"></i>
+                            Настройки</a>
+                        <div class="dropdown-divider mb-0"></div>
+                        <a class="dropdown-item" href="#"><i data-feather="power"
+                                                             class="align-self-center icon-xs icon-dual me-1"></i>
+                            Выход</a>
+                    </div>
+                </li>
+            </ul><!--end topbar-nav-->
+
+            <ul class="list-unstyled topbar-nav mb-0">
+                <li>
+                    <button class="nav-link button-menu-mobile">
+                        <i data-feather="menu" class="align-self-center topbar-icon"></i>
+                    </button>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- end navbar-->
+    </div>
+    <!-- Top Bar End -->
+
+    <!-- Page Content-->
+    <div class="page-content">
+        <div class="container-fluid">
+            @yield('content')
+        </div><!-- container -->
+
+        <footer class="footer text-center text-sm-start">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>
+            Dastone
+        </footer><!--end footer-->
+    </div>
+    <!-- end page content -->
+</div>
+<!-- end page-wrapper -->
+<!-- jQuery  -->
+<script src="{{asset('dastone/assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('dastone/assets/js/feather.min.js')}}"></script>
+<script src="{{asset('dastone/assets/js/simplebar.min.js')}}"></script>
+<script src="{{asset('dastone/assets/js/moment.js')}}"></script>
+<script src="{{asset('dastone/plugins/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{asset('dastone/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/jvectormap/jquery-jvectormap-us-aea-en.js')}}"></script>
+
+<!-- Required datatable js -->
+<script src="{{asset('dastone/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/dataTables.bootstrap5.min.js')}}"></script>
+
+<!-- Buttons -->
+<script src="{{asset('dastone/plugins/datatables/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/buttons.bootstrap5.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/jszip.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/pdfmake.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/vfs_fonts.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/buttons.html5.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/buttons.print.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/buttons.colVis.min.js')}}"></script>
+
+<!-- Responsive -->
+<script src="{{asset('dastone/plugins/datatables/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('dastone/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
+
+<!-- Toastr -->
+<script src="{{asset('dastone/plugins/toastr/toastr.min.js')}}"></script>
+
+<script src="{{asset('dastone/plugins/treeview/jstree.min.js')}}"></script>
+<script src="{{asset('dastone/assets/pages/jquery.treeview.init.js')}}"></script>
+
+<script src="{{asset('dastone/assets/js/waves.js')}}"></script>
+<!-- App js -->
+<script src="{{asset('dastone/assets/js/app.js')}}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
     $(function () {
-        $("#index-table, #table-paging1, #table-paging2").DataTable({
+        $("#inventories-table").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
@@ -275,14 +236,10 @@
                 "infoEmpty": 'Пока нет данных',
                 "search": 'Поиск:'
             },
-            "drawCallback": function () {
-
-            }
         });
     });
-
     $(function () {
-        $("").DataTable({
+        $("#datatable-buttons").DataTable({
             "responsive": true,
             "lengthMenu": [
                 [5, 10, 15],
@@ -299,11 +256,63 @@
                 "lengthMenu": 'Отображать по _MENU_ записей',
                 "paginate": {"previous": "<", "next": ">"}
             },
-            "drawCallback": function () {
 
-            }
+            "dom": 'lfBrtip',
+            "buttons": [
+                {
+                    extend: 'copy',
+                    text: 'Копировать',
+                    className: 'btn btn-dark',
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                },
+                {
+                    extend: 'print',
+                    text: 'Печать',
+                    className: 'btn btn-dark',
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    title: 'Каталог товаров',
+                },
+                {
+                    extend: 'colvis',
+                    text: 'Скрыть столбцы',
+                    className: 'btn btn-dark'
+                },
+                {
+                    extend: 'pdf',
+                    text: 'PDF',
+                    className: 'btn btn-dark',
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    title: 'Каталог товаров',
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV',
+                    className: 'btn btn-dark',
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    title: 'Каталог товаров',
+                },
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    className: 'btn btn-dark',
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    title: 'Каталог товаров',
+                },
+            ],
+
         });
     });
 </script>
 </body>
+
 </html>

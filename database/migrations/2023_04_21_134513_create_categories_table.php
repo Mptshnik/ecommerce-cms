@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
-            $table->string('parent')->nullable();
             $table->string('slug');
             $table->json('description_and_images')->nullable();
             $table->json('filterable_attributes')->nullable();

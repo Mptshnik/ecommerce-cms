@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attribute_types', function (Blueprint $table) {
-            $table->id();
             $table->string('label');
             $table->string('value');
+            $table->primary('value');
         });
     }
 

@@ -11,6 +11,18 @@ class Category extends Model
 
     protected $guarded = false;
 
+    public function parentCategory()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function childCategories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'products_categories');

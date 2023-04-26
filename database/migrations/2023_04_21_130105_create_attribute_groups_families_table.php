@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attribute_groups_families', function (Blueprint $table) {
-            $table->unsignedBigInteger('attribute_group_id');
+            $table->string('attribute_group_name_fk');
             $table->unsignedBigInteger('attribute_family_id');
-            $table->foreign('attribute_group_id')->references('id')
+            $table->foreign('attribute_group_name_fk')->references('name')
                 ->on('attribute_groups')->cascadeOnDelete();
             $table->foreign('attribute_family_id')->references('id')
                 ->on('attribute_families')->cascadeOnDelete();
-            $table->primary(['attribute_group_id', 'attribute_family_id']);
+            $table->primary(['attribute_group_name_fk', 'attribute_family_id']);
         });
     }
 

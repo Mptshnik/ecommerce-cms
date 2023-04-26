@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group_id')->nullable()->default(null);
-            $table->unsignedBigInteger('attribute_type_id');
+            $table->string('group_name_fk')->nullable()->default(null);
+            $table->string('attribute_type_value_fk');
             $table->string('code');
             $table->string('label');
+            $table->boolean('default')->default(false);
             $table->json('options')->nullable()->default(null);
-            $table->foreign('group_id')->references('id')->on('attribute_groups')->nullOnDelete();
-            $table->foreign('attribute_type_id')->references('id')->on('attribute_types')
+            $table->foreign('group_name_fk')->references('name')->on('attribute_groups')->nullOnDelete();
+            $table->foreign('attribute_type_value_fk')->references('value')->on('attribute_types')
                 ->restrictOnDelete();
         });
     }
