@@ -9,7 +9,7 @@
                         <h4 class="page-title">Склады</h4>
                     </div><!--end col-->
                     <div class="col-auto align-self-center">
-                        <a href="{{route('admin.inventories.create')}}" class="btn btn-primary">
+                        <a href="{{route('inventories.create')}}" class="btn btn-primary">
                             <i class="mdi mdi-plus"></i>
                             <span>Добавить склад</span>
                         </a>
@@ -47,7 +47,8 @@
                         <td>
                             <div class="row">
                                 <div class="col-auto">
-                                    <form method="POST" action="{{route('admin.inventories.destroy', $inventory)}}">
+                                    <form method="POST"
+                                          action="{{route('inventories.destroy', $inventory)}}">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="text-danger trash"
@@ -57,7 +58,8 @@
                                     </form>
                                 </div>
                                 <div class="col-auto">
-                                    <a href="{{route('admin.inventories.edit', $inventory)}}" class="text-primary"><i data-feather="edit"></i></a>
+                                    <a href="{{route('inventories.edit', $inventory)}}"
+                                       class="text-primary"><i data-feather="edit"></i></a>
                                 </div>
                             </div>
                         </td>

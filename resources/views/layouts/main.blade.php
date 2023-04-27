@@ -22,19 +22,14 @@
     <!-- Responsive datatable examples -->
     <link href="{{asset('dastone/plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 
-    <!-- jvectormap -->
-    <link href="{{asset('dastone/plugins/jvectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet">
 
     <!-- App css -->
     <link href="{{asset('dastone/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('dastone/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('dastone/assets/css/metisMenu.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('dastone/plugins/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('dastone/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"/>
 
     <link href="{{asset('dastone/plugins/toastr/toastr.css')}}" rel="stylesheet"/>
-
-    <link href="{{asset('dastone/plugins/treeview/themes/default/style.css')}}" rel="stylesheet">
 
     <link href="{{asset('dastone/assets/css/custom-styles.css')}}" rel="stylesheet">
 </head>
@@ -80,7 +75,7 @@
                 <ul class="nav-second-level" aria-expanded="false">
                     <li class="nav-item"><a class="nav-link" href="{{route('products.index')}}"><i class="ti-control-record"></i>Товары</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('admin.categories.index')}}"><i class="ti-control-record"></i>Категории</a>
+                    <li class="nav-item"><a class="nav-link" href="{{route('categories.index')}}"><i class="ti-control-record"></i>Категории</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Атрибуты</a>
                     </li>
@@ -106,7 +101,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Продажи</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('admin.inventories.index')}}"><i class="ti-control-record"></i>Склады</a>
+                    <li class="nav-item"><a class="nav-link" href="{{route('inventories.index')}}"><i class="ti-control-record"></i>Склады</a>
                     </li>
                 </ul>
             </li>
@@ -186,9 +181,6 @@
 <script src="{{asset('dastone/assets/js/feather.min.js')}}"></script>
 <script src="{{asset('dastone/assets/js/simplebar.min.js')}}"></script>
 <script src="{{asset('dastone/assets/js/moment.js')}}"></script>
-<script src="{{asset('dastone/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<script src="{{asset('dastone/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>
-<script src="{{asset('dastone/plugins/jvectormap/jquery-jvectormap-us-aea-en.js')}}"></script>
 
 <!-- Required datatable js -->
 <script src="{{asset('dastone/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -210,9 +202,6 @@
 
 <!-- Toastr -->
 <script src="{{asset('dastone/plugins/toastr/toastr.min.js')}}"></script>
-
-<script src="{{asset('dastone/plugins/treeview/jstree.min.js')}}"></script>
-<script src="{{asset('dastone/assets/pages/jquery.treeview.init.js')}}"></script>
 
 <script src="{{asset('dastone/assets/js/waves.js')}}"></script>
 <!-- App js -->

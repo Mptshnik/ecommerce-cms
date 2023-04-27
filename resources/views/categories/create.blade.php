@@ -13,7 +13,7 @@
     </div><!--end row-->
     <div class="row">
         <div class="col-md-12">
-            <form id="add-category-form" method="POST" action="{{route('admin.categories.store')}}">
+            <form id="add-category-form" method="POST" action="{{route('categories.store')}}">
                 @csrf
                 <div class="row row-cols-1 row-cols-md-2">
                     <div class="col-lg-6">
@@ -91,7 +91,7 @@
                     </div> <!--end col-->
                 </div>
                 <button type="submit" class="btn btn-primary">Добавить</button>
-                <a href="{{route('admin.categories.index')}}" class="btn btn-danger">
+                <a href="{{route('categories.index')}}" class="btn btn-danger">
                     <span>Отмена</span>
                 </a>
             </form>

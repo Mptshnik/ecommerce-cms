@@ -58,8 +58,8 @@
                              class="accordion-collapse collapse"
                              aria-labelledby="inventories" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="col-lg-6">
-                                    @foreach($inventories as $inventory)
+                                @foreach($inventories as $inventory)
+                                    <div class="col-lg-6 mt-3">
                                         <label class="form-label">{{$inventory->name}}</label>
                                         @php
                                             $qty = $product->inventories()->where('code', $inventory->code)->first()?->pivot->quantity ?? 0;
@@ -67,8 +67,8 @@
                                         <input class="form-control" name="{{$inventory->code}}"
                                                value="{{$qty}}"
                                                min="0" step="1" type="number">
-                                    @endforeach
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -112,6 +112,7 @@
                     @foreach($codes as $code)
                     "{{$code}}" : 'Поле обязательно',
                     @endforeach
+
                 }
             });
         });

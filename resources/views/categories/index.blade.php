@@ -9,7 +9,7 @@
                         <h4 class="page-title">Все категории</h4>
                     </div><!--end col-->
                     <div class="col-auto align-self-center">
-                        <a href="{{route('admin.categories.create')}}" class="btn btn-primary">
+                        <a href="{{route('categories.create')}}" class="btn btn-primary">
                             <i class="mdi mdi-plus"></i>
                             <span>Добавить категорию</span>
                         </a>
@@ -55,7 +55,7 @@
                         <td>
                             <div class="row">
                                 <div class="col-auto">
-                                    <form method="POST" action="{{route('admin.categories.destroy', $category)}}">
+                                    <form method="POST" action="{{route('categories.destroy', $category)}}">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="text-danger trash"
@@ -65,7 +65,7 @@
                                     </form>
                                 </div>
                                 <div class="col-auto">
-                                    <a href="{{route('admin.categories.edit', $category)}}" class="text-primary"><i data-feather="edit"></i></a>
+                                    <a href="{{route('categories.edit', $category)}}" class="text-primary"><i data-feather="edit"></i></a>
                                 </div>
                             </div>
                         </td>

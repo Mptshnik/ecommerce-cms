@@ -43,7 +43,7 @@ class CategoryController extends Controller
             'visible_in_menu' => $request->visible_in_menu ?? false
         ]);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Запись успешно добавлена');
+        return redirect()->route('categories.index')->with('success', 'Запись успешно добавлена');
     }
 
     /**

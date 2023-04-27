@@ -56,14 +56,14 @@ class InventorySourceController extends Controller
 
         InventorySource::create($data);
 
-        return redirect()->route('admin.inventories.index')
+        return redirect()->route('inventories.index')
             ->with('success', 'Запись успешно добавлена');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(InventorySource $inventorySource)
+    public function show(InventorySource $inventory)
     {
         //
     }
@@ -71,15 +71,14 @@ class InventorySourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InventorySource $inventorySource)
+    public function edit(InventorySource $inventory)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InventorySource $inventorySource)
+    public function update(Request $request, InventorySource $inventory)
     {
         //
     }
@@ -87,15 +86,15 @@ class InventorySourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InventorySource $inventorySource)
+    public function destroy(InventorySource $inventory)
     {
         if(InventorySource::all()->count() < 2){
             return redirect()->back()->with('fail', 'В системе должен быть минимум один склад');
         }
 
-        $inventorySource->delete();
+        $inventory->delete();
 
-        return redirect()->route('admin.inventories.index')
+        return redirect()->route('inventories.index')
             ->with('success', 'Запись успешно удалена');
     }
 }
