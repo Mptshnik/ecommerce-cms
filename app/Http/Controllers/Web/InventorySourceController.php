@@ -31,6 +31,30 @@ class InventorySourceController extends Controller
      */
     public function store(Request $request)
     {
+        InventorySource::create($this->getData($request));
+
+        return redirect()->route('inventories.index')
+            ->with('success', 'Запись успешно добавлена');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(InventorySource $inventory)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(InventorySource $inventory)
+    {
+        return view('inventories.edit', compact('inventory'));
+    }
+
+    private function getData(Request $request)
+    {
         $contact_information = [
             'full_name' => $request->full_name,
             'email' => $request->email,
@@ -54,25 +78,7 @@ class InventorySourceController extends Controller
             'address' => $address
         ];
 
-        InventorySource::create($data);
-
-        return redirect()->route('inventories.index')
-            ->with('success', 'Запись успешно добавлена');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(InventorySource $inventory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(InventorySource $inventory)
-    {
+        return $data;
     }
 
     /**
@@ -80,7 +86,10 @@ class InventorySourceController extends Controller
      */
     public function update(Request $request, InventorySource $inventory)
     {
-        //
+        $inventory->update($this->getData($request));
+
+        return redirect()->route('inventories.index')
+            ->with('success', 'Запись успешно изменена');
     }
 
     /**

@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('group_name_fk')->nullable()->default(null);
             $table->string('attribute_type_value_fk');
             $table->string('code');
             $table->string('label');
+            $table->boolean('visible_on_frontend')->default(false);
             $table->boolean('default')->default(false);
             $table->json('options')->nullable()->default(null);
-            $table->foreign('group_name_fk')->references('name')->on('attribute_groups')->nullOnDelete();
             $table->foreign('attribute_type_value_fk')->references('value')->on('attribute_types')
                 ->restrictOnDelete();
         });

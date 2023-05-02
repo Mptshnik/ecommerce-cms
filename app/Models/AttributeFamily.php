@@ -17,7 +17,7 @@ class AttributeFamily extends Model
     {
         return $this->belongsToMany(AttributeGroup::class,
             'attribute_groups_families', 'attribute_family_id',
-            'attribute_group_name_fk','id', 'name')
+            'attribute_group_id','id', 'id')
             ->orderByRaw("FIELD(name, 'Общее', 'Описание', 'Цена', 'Доставка')");
     }
 

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('attributes', function (Blueprint $table) {
             $table->boolean('required')->nullable()->default(null);
             $table->boolean('unique')->nullable()->default(null);
+            $table->string('input_validation')->nullable()->default(null);
         });
     }
 

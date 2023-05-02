@@ -1,6 +1,7 @@
 .trash{
     background: transparent;
-    border: none
+    border: none;
+    color: red;
 }
 label.error {
     color: #dc3545;

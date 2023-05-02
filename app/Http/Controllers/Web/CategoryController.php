@@ -38,7 +38,9 @@ class CategoryController extends Controller
             'name' => $request->name,
             'category_id' => $request->category_id,
             'slug' => Str::slug($request->name),
-            'description_and_images' => [],
+            'description_and_images' => [
+                'description' => $request->description
+            ],
             'filterable_attributes' => [],
             'visible_in_menu' => $request->visible_in_menu ?? false
         ]);
@@ -59,7 +61,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $rootCategory = Category::where('slug', 'root')->first();
+
+        return view('categories.edit', compact('category', 'rootCategory'));
     }
 
     /**
@@ -67,7 +71,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'slug' => $category->slug == 'root' ? 'root' : Str::slug($request->name),
+            'description_and_images' => [
+                'description' => $request->description
+            ],
+            'filterable_attributes' => [],
+            'visible_in_menu' => $request->visible_in_menu ?? false
+        ]);
+
+        return redirect()->route('categories.index')->with('success', 'Запись успешно изменена');
     }
 
     /**
@@ -75,6 +90,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if ($category->slug == "root") {
+            return redirect()->route('categories.index')
+                ->with('fail', 'Невозможно удалить корневую категорию');
+        }
+
+        $category->delete();
+
+        return redirect()->route('categories.index')
+            ->with('success', 'Запись успешно удалена');
     }
 }

@@ -22,4 +22,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('products', \App\Http\Controllers\Web\ProductController::class)->except(['show']);
     Route::resource('inventories', \App\Http\Controllers\Web\InventorySourceController::class)->except(['show']);
     Route::resource('categories', \App\Http\Controllers\Web\CategoryController::class)->except(['show']);
+    Route::resource('product-attributes', \App\Http\Controllers\Web\ProductAttributeController::class)->except(['show']);
+    Route::resource('attribute-families', \App\Http\Controllers\Web\AttributeFamilyController::class)->except(['show']);
 });

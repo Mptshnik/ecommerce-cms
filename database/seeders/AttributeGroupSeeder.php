@@ -13,21 +13,24 @@ class AttributeGroupSeeder extends Seeder
      */
     public function run(): void
     {
-        $groups = [
-            [
-                'name' => AttributeGroup::$COMMON
-            ],
-            [
-                'name' => AttributeGroup::$DESCRIPTION
-            ],
-            [
-                'name' => AttributeGroup::$PRICE
-            ],
-            [
-                'name' => AttributeGroup::$SHIPPING
-            ],
-        ];
+        $common = AttributeGroup::create([
+            'name' => AttributeGroup::$COMMON,
+        ]);
+        $common->attributes()->sync([1,2,3,4,5]);
 
-        AttributeGroup::insert($groups);
+        $description = AttributeGroup::create([
+            'name' => AttributeGroup::$DESCRIPTION,
+        ]);
+        $description->attributes()->sync([6,7]);
+
+        $price = AttributeGroup::create([
+            'name' => AttributeGroup::$PRICE,
+        ]);
+        $price->attributes()->sync([8,9,10,11,12]);
+
+        $shipping = AttributeGroup::create([
+            'name' => AttributeGroup::$SHIPPING,
+        ]);
+        $shipping->attributes()->sync([13]);
     }
 }

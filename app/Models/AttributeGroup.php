@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AttributeGroup extends Model
@@ -16,13 +17,17 @@ class AttributeGroup extends Model
     public static string $SHIPPING = 'Доставка';
     protected $guarded = false;
 
+    public $timestamps = false;
+
     public function families()
     {
-        return $this->belongsToMany(AttributeFamily::class, 'attribute_groups_families', 'attribute_group_name_fk', 'attribute_family_id');
+        return $this->belongsToMany(AttributeFamily::class,
+            'attribute_groups_families', 'attribute_group_id',
+            'attribute_family_id');
     }
 
-    public function attributes() : HasMany
+    public function attributes() : BelongsToMany
     {
-        return $this->hasMany(ProductAttribute::class, 'group_name_fk', 'name');
+        return $this->belongsToMany(ProductAttribute::class, 'attributes_groups', 'attribute_group_id', 'attribute_id');
     }
 }

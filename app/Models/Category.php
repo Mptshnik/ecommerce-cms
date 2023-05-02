@@ -21,7 +21,10 @@ class Category extends Model
         return $this->hasMany(Category::class);
     }
 
-
+    public function getKeyValueFromDescription(string $key)
+    {
+        return data_get($this->description_and_images, $key);
+    }
 
     public function products()
     {

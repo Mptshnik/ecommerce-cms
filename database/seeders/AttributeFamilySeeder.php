@@ -20,7 +20,7 @@ class AttributeFamilySeeder extends Seeder
             'name' => 'По умолчанию'
         ]);
 
-        $groups = AttributeGroup::all()->pluck('name');
+        $groups = AttributeGroup::all()->pluck('id');
 
         $family->groups()->sync($groups);
     }

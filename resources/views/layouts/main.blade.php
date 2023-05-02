@@ -77,9 +77,9 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{route('categories.index')}}"><i class="ti-control-record"></i>Категории</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Атрибуты</a>
+                    <li class="nav-item"><a class="nav-link" href="{{route('product-attributes.index')}}"><i class="ti-control-record"></i>Атрибуты</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="ti-control-record"></i>Коллеции атрибутов</a>
+                    <li class="nav-item"><a class="nav-link" href="{{route('attribute-families.index')}}"><i class="ti-control-record"></i>Коллеции атрибутов</a>
                     </li>
                 </ul>
             </li>
@@ -206,11 +206,9 @@
 <script src="{{asset('dastone/assets/js/waves.js')}}"></script>
 <!-- App js -->
 <script src="{{asset('dastone/assets/js/app.js')}}"></script>
+<script src="{{asset('dastone/assets/js/jquery.validate.js')}}"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
-        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
     $(function () {
