@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AttributeFamily;
 use App\Models\AttributeGroup;
+use App\Models\ProductAttribute;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
@@ -20,8 +21,8 @@ class AttributeFamilySeeder extends Seeder
             'name' => 'По умолчанию'
         ]);
 
-        $groups = AttributeGroup::all()->pluck('id');
+        $attributes = ProductAttribute::all()->pluck('id');
 
-        $family->groups()->sync($groups);
+        $family->attributes()->sync($attributes);
     }
 }

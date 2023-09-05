@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\AttributeFamily;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\InventorySource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index()
     {
@@ -22,25 +24,24 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function create()
     {
-        $attributeFamilies = AttributeFamily::with('groups')->get();
+        $attributeFamilies = AttributeFamily::all();
 
         return view('products.create', compact('attributeFamilies'));
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $attributeFamily = AttributeFamily::find($request->attribute_family_id)
-            ->with('groups')->first();
-
         $product = Product::create([
-            'attribute_family_id' => $attributeFamily->id,
+            'attribute_family_id' => $request->attribute_family_id,
             'specifications' => [
                 'sku' => $request->sku
             ]
@@ -50,76 +51,33 @@ class ProductController extends Controller
             ->with('success', 'Запись успешно добавлена!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    private function getAllAttributeCodes($attribute_family_id)
-    {
-        $attributeFamily = AttributeFamily::find($attribute_family_id)
-            ->with('groups')->first();
-        $groups = $attributeFamily->groups;
-
-        $codes = [];
-
-        foreach ($groups as $group)
-        {
-            foreach ($group->attributes as $attribute)
-            {
-                $codes[] = $attribute->code;
-            }
-        }
-
-        return $codes;
-    }
-
-    private function getRequiredAttributeCodes($attribute_family_id)
-    {
-        $attributeFamily = AttributeFamily::find($attribute_family_id)
-            ->with('groups')->first();
-        $groups = $attributeFamily->groups;
-
-        $codes = [];
-
-        foreach ($groups as $group)
-        {
-            $requiredAttributes = $group->attributes()->where('required', 1)->get();
-            foreach ($requiredAttributes as $attribute)
-            {
-                $codes[] = $attribute->code;
-            }
-        }
-
-        return $codes;
-    }
-
 
     /**
-     * Show the form for editing the specified resource.
+     * @param Product $product
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function edit(Product $product)
     {
         $rootCategory = Category::where('slug', 'root')->first();
         $inventories = InventorySource::where('status', 1)->get();
 
-        $codes = $this->getRequiredAttributeCodes($product->attribute_family_id);
+        $codes = $product->attributeFamily->attributes()->where('required', 1)->get()->pluck('code');
 
-        return view('products.edit', compact( 'product', 'codes', 'inventories', 'rootCategory'));
+        return view('products.edit', compact('product', 'codes', 'inventories', 'rootCategory'));
     }
 
 
     /**
-     * Update the specified resource in storage.
+     * @param Request $request
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Product $product)
     {
         $data = [];
-        $codes = $this->getAllAttributeCodes($product->attribute_family_id);
-        foreach ($codes as $code){
+        $codes = $product->attributeFamily->attributes()->pluck('code');
+
+        foreach ($codes as $code) {
             $data[$code] = $request[$code] ?? null;
         }
 
@@ -132,12 +90,21 @@ class ProductController extends Controller
         $inventoryCodes = InventorySource::all()->pluck('code');
 
         $product->inventories()->detach();
-        foreach ($inventoryCodes as $inventoryCode)
-        {
+        foreach ($inventoryCodes as $inventoryCode) {
             $quantity = $request[$inventoryCode];
-            if($quantity > 0){
+            if ($quantity > 0) {
                 $inventory = InventorySource::where('code', $inventoryCode)->first();
                 $product->inventories()->attach($inventory, ['quantity' => $quantity]);
+            }
+        }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->images as $image) {
+                $path = Storage::disk('public')->put('/products/images', $image);
+                Image::create([
+                    'url' => $path,
+                    'product_id' => $product->id
+                ]);
             }
         }
 
@@ -145,15 +112,36 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Product $product)
     {
         try {
             $product->delete();
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image->url);
+                $image->delete();
+            }
             return redirect()->route('products.index')->with('success', 'Запись успешно удалена');
         } catch (\Exception $exception) {
             return redirect()->route('products.index')->with('fail', 'Не удалось удалить запись');
+        }
+    }
+
+    /**
+     * @param Image $image
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteImage(Image $image)
+    {
+        try {
+            Storage::disk('public')->delete($image->url);
+            $image->delete();
+
+            return redirect()->back()->with('success', 'Изображение удалено');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('fail', 'Не удалось удалить изображение');
         }
     }
 }

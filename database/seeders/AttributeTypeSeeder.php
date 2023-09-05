@@ -46,18 +46,6 @@ class AttributeTypeSeeder extends Seeder
                 'label' => 'Дата',
                 'value' => AttributeType::$DATE
             ],
-            [
-                'label' => 'Изображение',
-                'value' => AttributeType::$IMAGE
-            ],
-            [
-                'label' => 'Файл',
-                'value' => AttributeType::$FILE
-            ],
-            [
-                'label' => 'Флажок',
-                'value' => AttributeType::$CHECKBOX
-            ],
         ];
 
         AttributeType::insert($attributeTypes);

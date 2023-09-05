@@ -1,3 +1,6 @@
+@php
+    $title = 'Изменение атрибута'
+@endphp
 @extends('layouts.main')
 @section('content')
     <div class="row">

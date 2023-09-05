@@ -1,3 +1,6 @@
+@php
+    $title = 'Добавление атрибута'
+@endphp
 @extends('layouts.main')
 @section('content')
     <div class="row">
@@ -70,6 +73,7 @@
                                 <div id="inputValidation" style="display: none" class="mt-3">
                                     <label class="form-label">Ввод</label>
                                     <select name="input_validation" class="form-select">
+                                        <option value="{{null}}"></option>
                                         <option value="integer">Целое число</option>
                                         <option value="decimal">Десятичное число</option>
                                     </select>
@@ -175,13 +179,18 @@
             $("#add-attribute-form").validate({
                 rules: {
                     name: "required",
-                    code: "required",
+                    code: {
+                        required: true,
+                        nowhitespace: true,
+                    },
                     "options[]": "required"
-
                 },
                 messages: {
                     name: "Поле обязательно",
-                    code: "Поле обязательно",
+                    code: {
+                      required: "Поле обязательно", nowhitespace: "Поле не должно содержать пробелы",
+                    },
+
                     "options[]": "Поле обязательно"
                 },
                 errorPlacement: function(error, element) {

@@ -13,12 +13,11 @@ class AttributeFamily extends Model
 
     public $timestamps = false;
 
-    public function groups()
+    public function attributes()
     {
-        return $this->belongsToMany(AttributeGroup::class,
-            'attribute_groups_families', 'attribute_family_id',
-            'attribute_group_id','id', 'id')
-            ->orderByRaw("FIELD(name, 'Общее', 'Описание', 'Цена', 'Доставка')");
+        return $this->belongsToMany(ProductAttribute::class,
+            'attributes_families', 'attribute_family_id',
+            'attribute_id','id', 'id');
     }
 
     public function products()

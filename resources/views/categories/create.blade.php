@@ -1,3 +1,6 @@
+@php
+    $title = 'Добавление категории'
+@endphp
 @extends('layouts.main')
 @section('content')
     <div class="row">
@@ -54,18 +57,7 @@
                             </div><!--end card-body-->
                         </div><!--end card-->
                     </div> <!--end col-->
-                    <div class="col-lg-6">
-                        <div class="card report-card">
-                            <div class="card-header">
-                                <div class="fs-5">
-                                    Фильтрация по атрибутам
-                                </div>
-                            </div><!--end card-body-->
-                            <div class="card-body">
 
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div> <!--end col-->
                     <div class="col-lg-6">
                         <div class="card report-card">
                             <div class="card-header">

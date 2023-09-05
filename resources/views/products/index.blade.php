@@ -1,3 +1,6 @@
+@php
+    $title = 'Все товары'
+@endphp
 @extends('layouts.main')
 @section('content')
     @include('components.toastr.toast')

@@ -1,3 +1,6 @@
+@php
+    $title = 'Склады'
+@endphp
 @extends('layouts.main')
 @section('content')
     @include('components.toastr.toast')

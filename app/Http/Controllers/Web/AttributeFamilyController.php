@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class AttributeFamilyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * Вывод всех коллекций атрибутов
      */
     public function index()
     {
@@ -20,72 +21,99 @@ class AttributeFamilyController extends Controller
         return view('attribute-families.index', compact('attributeFamilies'));
     }
 
-    private function getAllAttributeIDs($groups)
-    {
-        $ids = [];
-
-        foreach ($groups as $group)
-        {
-            foreach ($group->attributes as $attribute)
-            {
-                $ids[] = $attribute->id;
-            }
-        }
-
-        return $ids;
-    }
-
     /**
-     * Show the form for creating a new resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * Вывод страницы добавления
      */
     public function create()
     {
-        $groups = AttributeFamily::where('code', 'default')->first()->groups;
+        $defaultAttributes = AttributeFamily::where('code', 'default')->first()->attributes->pluck('id');
 
-        $ids = $this->getAllAttributeIDs($groups);
+        $attributes = ProductAttribute::whereNotIn('id', $defaultAttributes)->get();
 
-        $attributes = ProductAttribute::whereNotIn('id', $ids)->get();
-
-        return view('attribute-families.create', compact('groups', 'attributes'));
+        return view('attribute-families.create', compact('attributes'));
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * Функция принимает запрос на добавление данных
+     * Возвращает страницу вывода всех коллекций атрибутов
      */
     public function store(Request $request)
     {
-        //
+        $family = AttributeFamily::create([
+            'name' => $request->name,
+            'code' => $request->code,
+        ]);
+
+        $defaultAttributes = AttributeFamily::where('code', 'default')->first()->attributes->pluck('id');
+
+        $family->attributes()->syncWithoutDetaching($defaultAttributes);
+
+        if ($request->attribute_ids) {
+            $family->attributes()->syncWithoutDetaching($request->attribute_ids);
+        }
+
+        return redirect()->route('attribute-families.index')
+            ->with('success', 'Запись успешно добавлена');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(AttributeFamily $attributeFamily)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * @param AttributeFamily $attributeFamily
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * Вывод страницы измененения
+     * Функция принимает коллекцию атрибутов
      */
     public function edit(AttributeFamily $attributeFamily)
     {
-        //
+        $defaultAttributes = AttributeFamily::where('code', 'default')->first()->attributes->pluck('id');
+
+        $attributes = ProductAttribute::whereNotIn('id', $defaultAttributes)->get();
+
+        return view('attribute-families.edit', compact('attributes', 'attributeFamily'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param Request $request
+     * @param AttributeFamily $attributeFamily
+     * @return \Illuminate\Http\RedirectResponse
+     * Функция принимает коллекцию атрибутов и запрос на изменение данных
+     * Функция отвечает за сохранение изменений
+     * Возвращает редирект на страницу вывода всех коллекций атрибутов
      */
     public function update(Request $request, AttributeFamily $attributeFamily)
     {
-        //
+        $attributeFamily->update([
+            'name' => $request->name,
+        ]);
+
+        $defaultAttributes = AttributeFamily::where('code', 'default')->first()->attributes->pluck('id');
+
+        $attributeFamily->attributes()->sync($defaultAttributes);
+
+        if ($request->attribute_ids) {
+            $attributeFamily->attributes()->syncWithoutDetaching($request->attribute_ids);
+        }
+
+        return redirect()->route('attribute-families.index')
+            ->with('success', 'Запись успешно изменена');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param AttributeFamily $attributeFamily
+     * @return \Illuminate\Http\RedirectResponse
+     * Функция принимает коллекцию атрибутов
+     * Функция отвечает за удаление данных
      */
     public function destroy(AttributeFamily $attributeFamily)
     {
+        if ($attributeFamily->code == 'default') {
+            return redirect()->route('attribute-families.index')
+                ->with('fail', 'Невозможно удалить системный атрибут');
+        }
+
         if (AttributeFamily::all()->count() < 2) {
             return redirect()->route('attribute-families.index')
                 ->with('fail', 'В системе должна быть минимум одня коллекция атрибутов');

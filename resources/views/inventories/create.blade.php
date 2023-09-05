@@ -1,3 +1,6 @@
+@php
+    $title = 'Добавление склада'
+@endphp
 @extends('layouts.main')
 @section('content')
     <div class="row">

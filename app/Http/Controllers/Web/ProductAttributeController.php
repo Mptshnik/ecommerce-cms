@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductAttributeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class ProductAttributeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function create()
     {
@@ -30,7 +30,8 @@ class ProductAttributeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -48,16 +49,10 @@ class ProductAttributeController extends Controller
         return redirect()->route('product-attributes.index')->with('success', 'Запись успешно добавлена');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProductAttribute $productAttribute)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
+     * @param ProductAttribute $productAttribute
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function edit(ProductAttribute $productAttribute)
     {
@@ -67,7 +62,9 @@ class ProductAttributeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param Request $request
+     * @param ProductAttribute $productAttribute
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, ProductAttribute $productAttribute)
     {
@@ -81,7 +78,8 @@ class ProductAttributeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param ProductAttribute $productAttribute
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(ProductAttribute $productAttribute)
     {

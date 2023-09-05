@@ -1,3 +1,6 @@
+@php
+    $title = 'Добавление товара'
+@endphp
 @extends('layouts.main')
 @section('content')
     <div class="row">
@@ -39,10 +42,18 @@
         $(function() {
             $("#add-product-form").validate({
                 rules: {
-                    sku: "required",
+                    sku: {
+                        required:true,
+                        nowhitespace: true,
+                        maxlength: 255,
+                    },
                 },
                 messages:{
-                    sku: "Поле обязательно"
+                    sku: {
+                        required: "Поле обязательно",
+                        nowhitespace: "Текст не может содержать пробелы",
+                        maxlength: "Максимальная длина поля 255 символов"
+                    }
                 }
             });
         });

@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AttributeTypeSeeder::class);
         $this->call(AttributeSeeder::class);
-        $this->call(AttributeGroupSeeder::class);
         $this->call(AttributeFamilySeeder::class);
         $this->call(InventorySourceSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
